@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
-import farmerReducer from "./farmer/farmerReducer";
+import farmersReducer from "./farmers/farmersReducer";
 
 const rootReducer = combineReducers({
-    farmer : farmerReducer
+    farmers : farmersReducer
 })
 
 export default rootReducer

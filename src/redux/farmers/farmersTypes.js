@@ -1,0 +1,2 @@
+export const UPDATE_FARMERS = 'UPDATE_FARMERS'
+

@@ -1,1 +1,1 @@
-export * from './farmer/farmerActions'
+export {updateFarmers} from './farmers/farmersActions'
