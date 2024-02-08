@@ -1,14 +1,18 @@
 import React from "react";
 import { connect } from "react-redux";
+import Table from "react-bootstrap/Table";
 
 function Farmer(props) {
-  return ( props.farmers.length ? 
-    <table>
-      <tr>
-        <th>Address</th>
-        <th>Price Per Kg</th>
-        <th>Rating</th> 
-      </tr>
+  return props.farmers.length ? (
+    <Table striped bordered hover variant="dark">
+      <thead>
+        <tr>
+          <th>Address</th>
+          <th>Price Per Kg</th>
+          <th>Rating</th>
+        </tr>
+      </thead>
+      <tbody>
       {props.farmers.map((farmer) => {
         return (
           <tr>
@@ -18,7 +22,9 @@ function Farmer(props) {
           </tr>
         );
       })}
-    </table> :
+      </tbody>
+    </Table>
+  ) : (
     <table></table>
   );
 }

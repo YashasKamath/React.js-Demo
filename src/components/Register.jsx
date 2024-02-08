@@ -2,8 +2,8 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
-import { Input, Tab, Ripple, initMDB } from "mdb-ui-kit";
-initMDB({ Input, Tab, Ripple });
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 function Register() {
   const [email, setEmail] = useState("");
@@ -18,14 +18,12 @@ function Register() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if(password.length < 6){
-      setError('Password should contain a minimum of 6 characters!')
-    }
-    else if (password !== repeatPassword) {
+    if (password.length < 6) {
+      setError("Password should contain a minimum of 6 characters!");
+    } else if (password !== repeatPassword) {
       setError("Password and repeat password not matching!");
       return;
-    } 
-    else setError(""); 
+    } else setError("");
 
     try {
       const userCredential = await createUserWithEmailAndPassword(
@@ -47,138 +45,94 @@ function Register() {
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-6">
-          <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
-            <li class="nav-item" role="presentation">
-              <a
-                class="nav-link"
-                id="tab-login"
-                data-mdb-pill-init
-                href="/login"
-                role="tab"
-                aria-controls="pills-login"
-                aria-selected="false"
-              >
-                Login
-              </a>
-            </li>
-            <li class="nav-item" role="presentation">
-              <a
-                class="nav-link active"
-                id="tab-register"
-                data-mdb-pill-init
-                href="/register"
-                role="tab"
-                aria-controls="pills-register"
-                aria-selected="true"
-              >
-                Register
-              </a>
-            </li>
-          </ul>
-
-          <div class="tab-content">
-            <div
-              class="tab-pane fade show active"
-              id="pills-register"
-              role="tabpanel"
-              aria-labelledby="tab-register"
-            >
-              {error && (
-                <div class="alert alert-danger" role="alert">
-                  {error}
-                </div>
-              )}
-
-              <form onSubmit={handleSubmit}>
-                <div data-mdb-input-init class="form-outline mb-4">
-                  <input
-                    type="text"
-                    id="registerName"
-                    class="form-control"
-                    onChange={(event) => setName(event.target.value)}
-                    value={name}
+          <Form onSubmit={handleSubmit}>
+            <h2>Register</h2>
+            {error && (
+              <div className="alert alert-danger" role="alert">
+                {error}
+              </div>
+            )}
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                placeholder="name"
+                type="text"
+                className="form-control"
+                onChange={(event) => setName(event.target.value)}
+                value={name}
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Username</Form.Label>
+              <Form.Control
+                placeholder="username"
+                type="text"
+                className="form-control"
+                value={username}
+                onChange={(event) => setUsername(event.target.value)}
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="email"
+                className="form-control"
+                onChange={(event) => setEmail(event.target.value)}
+                value={email}
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                placeholder="password"
+                className="form-control"
+                type="password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Repeat Password</Form.Label>
+              <Form.Control
+                placeholder="repeat password"
+                className="form-control"
+                type="password"
+                value={repeatPassword}
+                onChange={(event) => setRepeatPassword(event.target.value)}
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Type of user</Form.Label>
+              {["admin", "customer", "farmer"].map((type) => (
+                <div key={`inline-radio`} className="mb-3">
+                  <Form.Check
                     required
+                    inline
+                    label={type}
+                    name="type"
+                    type="radio"
+                    id={`inline-radio-${type}`}
+                    // onClick={handleRadio}
                   />
-                  <label
-                    class="form-label"
-                    for="registerName"
-                    id="registerNameLabel"
-                  >
-                    Name
-                  </label>
                 </div>
+              ))}
+            </Form.Group>
 
-                <div data-mdb-input-init class="form-outline mb-4">
-                  <input
-                    type="text"
-                    id="registerUsername"
-                    class="form-control"
-                    value={username}
-                    onChange={(event) => setUsername(event.target.value)}
-                    required
-                  />
-                  <label class="form-label" for="registerUsername">
-                    Username
-                  </label>
-                </div>
-
-                <div data-mdb-input-init class="form-outline mb-4">
-                  <input
-                    type="email"
-                    id="registerEmail"
-                    class="form-control"
-                    onChange={(event) => setEmail(event.target.value)}
-                    value={email}
-                    required
-                  />
-                  <label class="form-label" for="registerEmail">
-                    Email
-                  </label>
-                </div>
-
-                <div data-mdb-input-init class="form-outline mb-4">
-                  <input
-                    type="password"
-                    id="registerPassword"
-                    class="form-control"
-                    value={password}
-                    onChange={(event) => setPassword(event.target.value)}
-                    required
-                  />
-                  <label class="form-label" for="registerPassword">
-                    Password
-                  </label>
-                </div>
-
-                <div data-mdb-input-init class="form-outline mb-4">
-                  <input
-                    type="password"
-                    id="registerRepeatPassword"
-                    class="form-control"
-                    value={repeatPassword}
-                    onChange={(event) => setRepeatPassword(event.target.value)}
-                    required
-                  />
-                  <label class="form-label" for="registerRepeatPassword">
-                    Repeat password
-                  </label>
-                </div>
-
-                <button
-                  data-mdb-ripple-init
-                  type="submit"
-                  class="btn btn-primary btn-block mb-3"
-                >
-                  Sign up
-                </button>
-                <div class="text-center">
-                  <p>
-                    Already a member? <a href="/login">Login</a>
-                  </p>
-                </div>
-              </form>
+            <div class="text-center">
+              <Button as="input" type="submit" value="Sign Up" />
+              <br />
+              <br />
+              <p>
+                Already a member? <a href="/login">Login</a>
+              </p>
             </div>
-          </div>
+          </Form>
         </div>
       </div>
     </div>

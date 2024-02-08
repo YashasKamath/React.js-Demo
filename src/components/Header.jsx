@@ -86,7 +86,10 @@ function Header() {
             </MDBNavbarItem>
           </MDBNavbarNav>
 
-          <form className="d-flex input-group w-auto" style={{"margin-right":"5px"}}>
+          <form
+            className="d-flex input-group w-auto"
+            style={{ "margin-right": "5px" }}
+          >
             <input
               type="search"
               className="form-control"
@@ -109,21 +112,24 @@ function Header() {
             </MDBNavbarItem>
           )} */}
           <div class="collapse navbar-collapse" id="navbarNav">
-  <ul class="navbar-nav ms-auto">
-    <li class="nav-item">
-      <button
-          type="submit"
-          class="btn btn-primary"
-          data-mdb-ripple-init
-          onClick={handleLogout}
-          style={{"white-space": "nowrap"}}
-        >
-          Log Out
-          <i class="fas fa-sign-out-alt" style={{"margin-left": "5px"}}></i>
-      </button>
-    </li>
-  </ul>
-</div>
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  data-mdb-ripple-init
+                  onClick={handleLogout}
+                  style={{ "whiteSpace": "nowrap" }}
+                >
+                  Log Out
+                  <i
+                    class="fas fa-sign-out-alt"
+                    style={{ "marginLeft": "5px" }}
+                  ></i>
+                </button>
+              </li>
+            </ul>
+          </div>
         </MDBCollapse>
       </MDBContainer>
     </MDBNavbar>

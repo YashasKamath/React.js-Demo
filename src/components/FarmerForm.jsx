@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { updateFarmers } from "../redux";
-import { Input, Ripple, initMDB } from "mdb-ui-kit";
-
-initMDB({ Input, Ripple });
+import "../App.css";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 function FarmerForm(props) {
   const [farmer, setFarmer] = useState({
     address: "",
     rating: "",
-    pricePerKg: ""
+    pricePerKg: "",
   });
 
   const [error, setError] = useState("");
@@ -41,72 +41,62 @@ function FarmerForm(props) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Intro Form</h2>
-      {error && (
-        <div className="alert alert-danger" role="alert">
-          {error}
-        </div>
-      )}
-      <div className="container">
-        <div className="row justify-content-center">
-          <div className="col-md-6">
-            <div data-mdb-input-init className="form-outline mb-4">
-              <input
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <Form onSubmit={handleSubmit}>
+            <h2>Intro Form</h2>
+            {error && (
+              <div className="alert alert-danger" role="alert">
+                {error}
+              </div>
+            )}
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Address</Form.Label>
+              <Form.Control
+                placeholder="address"
                 type="text"
                 id="form3Example3"
-                className="form-control"
+                class="form-control"
                 value={farmer.address}
                 onChange={handleChange}
                 name="address"
                 required
               />
-              <label className="form-label" for="form3Example3">
-                Address
-              </label>
-            </div>
-
-            <div data-mdb-input-init className="form-outline mb-4">
-              <input
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Price per kg</Form.Label>
+              <Form.Control
+                placeholder="price per kg"
                 type="number"
                 id="form3Example4"
-                className="form-control"
+                class="form-control"
                 value={farmer.pricePerKg}
                 onChange={handleChange}
                 name="pricePerKg"
                 required
               />
-              <label className="form-label" for="form3Example4">
-                Price per kg
-              </label>
-            </div>
-
-            <div data-mdb-input-init className="form-outline mb-4">
-              <input
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Rating</Form.Label>
+              <Form.Control
+                placeholder="rating"
                 type="number"
                 id="form3Example4"
-                className="form-control"
+                class="form-control"
                 value={farmer.rating}
                 onChange={handleChange}
                 name="rating"
                 required
               />
-              <label className="form-label" for="form3Example4">
-                Rating
-              </label>
+            </Form.Group>
+            <div class="text-center">
+              <Button as="input" type="submit" value="Submit" />
             </div>
-
-            <button
-              data-mdb-ripple-init
-              type="submit"
-              className="btn btn-primary btn-block mb-4"
-            >
-              Submit
-            </button>
-          </div>
+          </Form>
         </div>
       </div>
-    </form>
+    </div>
   );
 }
 

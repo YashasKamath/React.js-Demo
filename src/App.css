@@ -1,12 +1,11 @@
 body {
     margin: 0;
     padding: 10px;
-    height: 1000px;
 }
  
-.App {
+/* .App {
     text-align: center;
-}
+} */
  
 .footer {
     position: fixed;
@@ -15,3 +14,13 @@ body {
     color: white;
     font-size: 25px;
 }
+
+.Form.Label {
+text-align: left;
+}
+
+.Form.Control::placeholder {
+text-align: left;
+}
+  
+  
