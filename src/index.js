@@ -5,7 +5,8 @@ import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } 
 import Register from './components/Register';
 import Login from './components/Login';
 import Protected from './components/Protected';
-import Home from './components/Home';
+import Home from './components/Home'
+import Songs from './components/Songs';
 // import '../styles'
 
 // import dotenv from 'dotenv';
@@ -18,6 +19,7 @@ const router = createBrowserRouter(
             <Route path="login" element={<Login />} />
             <Route path='/' element={<Protected />}>
                 <Route path='/' index element={<Home />} />
+                <Route path='/songs' index element={<Songs />} />
             </Route>
         </Route>
     )
