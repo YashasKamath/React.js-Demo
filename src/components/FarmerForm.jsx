@@ -18,7 +18,7 @@ function FarmerForm(props) {
   const [amount, setAmount] = useState("0");
 
   useEffect(() => {
-    props.updateUserEmail(localStorage.getItem("email"))
+    props.updateUserEmail(localStorage.getItem("email"));
     fetch("http://localhost:3002/farmers")
       .then((res) => res.json())
       .then((data) =>
@@ -31,20 +31,22 @@ function FarmerForm(props) {
           setIsFormSubmitted(true);
           setOrders(data[0]["orders"]);
           fetch("http://localhost:3002/adminOrders")
-          .then((res) => res.json())
-          .then((data) =>
-            data.filter(adminOrder => {
-              return adminOrder["farmerEmail"] === props.email;
+            .then((res) => res.json())
+            .then((data) =>
+              data.filter((adminOrder) => {
+                return adminOrder["farmerEmail"] === props.email;
+              })
+            )
+            .then((data) => {
+              let totalStocksBought = 0;
+              data.map(
+                (order) => (totalStocksBought += Number(order["stockInKg"]))
+              );
+              return totalStocksBought;
             })
-          )
-          .then(data => {
-            let totalStocksBought = 0
-            data.map(order => totalStocksBought += Number(order["stockInKg"]))
-            return totalStocksBought
-          })
-          .then(totalStocksBought => {
-            setAmount(totalStocksBought * Number(data[0]["pricePerKg"]));
-          })
+            .then((totalStocksBought) => {
+              setAmount(totalStocksBought * Number(data[0]["pricePerKg"]));
+            });
         } else setIsFormSubmitted(false);
       })
       .catch((error) => console.log(error));
@@ -173,6 +175,13 @@ function FarmerForm(props) {
           )}
           {isFormSubmitted && <h2>Number of orders placed : {orders}</h2>}
           {isFormSubmitted && <h2>Amount earned: {amount}</h2>}
+          {isFormSubmitted && (
+            <div>
+              <br />
+              <br />
+              <br />
+            </div>
+          )}
         </div>
       </div>
     </div>

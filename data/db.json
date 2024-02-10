@@ -5,9 +5,9 @@
       "address": "ya",
       "rating": "5",
       "pricePerKg": "56",
-      "stockInKg": 1,
+      "stockInKg": 0,
       "email": "ya@gmail.com",
-      "orders": 7
+      "orders": 8
     },
     {
       "id": "5258",
@@ -68,6 +68,16 @@
       "id": "af50",
       "farmerEmail": "ya@gmail.com",
       "stockInKg": "1"
+    },
+    {
+      "id": "021d",
+      "farmerEmail": "ya@gmail.com",
+      "stockInKg": "1"
     }
-  ]
+  ],
+  "about" : {
+    "title" : "About",
+    "intro" : "Biogas technology may have the potential to short-circuit the “energy transition” from biogas to “modern” fuels. Biogas technology is a particularly useful system in the worldwide rural economy and can fulfill several end-uses. The gas is useful as a fuel substitute for firewood, dung, agricultural residues, petrol, diesel, and electricity, depending on the nature of the task, and local supply conditions and constraints, thus supplying energy for cooking and lighting. Biogas systems also provide a residue organic waste after anaerobic digestion that has superior nutrient qualities over the usual organic fertilizer, cattle dung, as it is in the form of ammonia. Anaerobic digesters also function as a waste disposal system, particularly for human waste, and can, therefore, prevent potential sources of environmental contamination and the spread of pathogens. Small-scale industries are also made possible, from the sale of surplus gas to the provision of power of a rural-based industry; therefore biogas may also provide the user with income generating opportunities. The gas can also be used to power engines, in a dual fuel mix with petrol and diesel, and can aid in pumped irrigation systems.",
+    "theme" : "This website is all about accommodating farmers on this website, collecting their details and then allowing the admin to make transactions, which are basically placing orders with the farmers for the organic waste stock that they have and helping farmers keep track of the amount that they have earned."
+  }
 }
