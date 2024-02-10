@@ -5,9 +5,9 @@
       "address": "ya",
       "rating": "5",
       "pricePerKg": "56",
-      "stockInKg": 9,
+      "stockInKg": 1,
       "email": "ya@gmail.com",
-      "orders": 3
+      "orders": 7
     },
     {
       "id": "5258",
@@ -17,6 +17,15 @@
       "stockInKg": 0,
       "email": "kk@gmail.com",
       "orders": 1
+    },
+    {
+      "id": "bbb9",
+      "address": "pqr",
+      "rating": "3",
+      "pricePerKg": "23",
+      "stockInKg": "89",
+      "email": "pqr@gmail.com",
+      "orders": 0
     }
   ],
   "adminOrders": [
@@ -39,6 +48,26 @@
       "id": "54a8",
       "farmerEmail": "ya@gmail.com",
       "stockInKg": "24"
+    },
+    {
+      "id": "68df",
+      "farmerEmail": "ya@gmail.com",
+      "stockInKg": "4"
+    },
+    {
+      "id": "ab0b",
+      "farmerEmail": "ya@gmail.com",
+      "stockInKg": "2"
+    },
+    {
+      "id": "a9ab",
+      "farmerEmail": "ya@gmail.com",
+      "stockInKg": "1"
+    },
+    {
+      "id": "af50",
+      "farmerEmail": "ya@gmail.com",
+      "stockInKg": "1"
     }
   ]
 }

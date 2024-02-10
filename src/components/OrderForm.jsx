@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import "../App.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { updateFarmersDataChanged } from "../redux";
-import { connect } from "react-redux";
 
 function OrderForm(props) {
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
   const [adminOrder, setAdminOrder] = useState({
     farmerEmail: "",
     stockInKg: "",
@@ -35,21 +35,22 @@ function OrderForm(props) {
         if (!data.length) {
           throw Error(`This farmer email doesn't exist`);
         }
-        if (Number(data[0]["stockInKg"]) < Number(adminOrder.stockInKg)){ 
+        if (Number(data[0]["stockInKg"]) < Number(adminOrder.stockInKg)) {
           throw Error("Invalid stock value");
         }
-        return data
+        return data;
       })
-      .then(data => {
-        console.log(data)
+      .then((data) => {
+        console.log(data);
         fetch(`http://localhost:3002/farmers/${data[0]["id"]}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            "orders" : Number(data[0]["orders"]) + 1,
-            "stockInKg" : Number(data[0]["stockInKg"]) - Number(adminOrder.stockInKg)
+            orders: Number(data[0]["orders"]) + 1,
+            stockInKg:
+              Number(data[0]["stockInKg"]) - Number(adminOrder.stockInKg),
           }),
         });
         fetch("http://localhost:3002/adminOrders", {
@@ -58,14 +59,18 @@ function OrderForm(props) {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(adminOrder),
-        })
+        });
         setAdminOrder({
           farmerEmail: "",
           stockInKg: "",
         });
         setError("");
-        props.updateFarmersDataChanged()
-        }).catch((error) => setError(error.message));
+        setSuccess('Order placed successfully!')
+      })
+      .catch((error) => {
+        setError(error.message);
+        setSuccess("");
+      });
   }
 
   return (
@@ -74,10 +79,16 @@ function OrderForm(props) {
         <div class="col-md-6">
           <Form onSubmit={handleSubmit}>
             <h2>Place Order</h2>
-            {error && (
+            {error ? (
               <div className="alert alert-danger" role="alert">
                 {error}
               </div>
+            ) : (
+              success && (
+                <div className="alert alert-success" role="alert">
+                  {success}
+                </div>
+              )
             )}
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Farmer Email</Form.Label>
@@ -115,10 +126,4 @@ function OrderForm(props) {
   );
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    updateFarmersDataChanged : () => dispatch(updateFarmersDataChanged())
-  }
-}
-
-export default connect(null, mapDispatchToProps)(OrderForm);
+export default OrderForm;

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
 import Table from "react-bootstrap/Table";
+import { useNavigate } from "react-router-dom";
+import Button from "react-bootstrap/Button";
 
-function Farmer(props) {
+function Orders(props) {
   const [adminOrders, setAdminOrders] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("http://localhost:3002/adminOrders")
@@ -13,11 +15,18 @@ function Farmer(props) {
       })
       .then((data) => setAdminOrders(data))
       .catch((error) => console.log(error));
-  }, [props.farmersDataChanged]);
+  }, []);
+
+  const goBack = () => {
+    navigate(-1)
+  };
 
   return adminOrders.length ? (
     <div>
-      <h3><u>Orders:</u></h3>
+      <h3 style={{"textAlign":"center"}}>
+        Orders
+      </h3>
+      <br />
       <Table striped bordered hover variant="dark">
         <thead>
           <tr>
@@ -36,16 +45,13 @@ function Farmer(props) {
           })}
         </tbody>
       </Table>
+      <div class="text-center">
+        <Button as="input" type="submit" value="Go Back" onClick={goBack}/>
+      </div>
     </div>
   ) : (
     <table></table>
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    farmersDataChanged: state.farmers.dataChanged,
-  };
-};
-
-export default connect(mapStateToProps)(Farmer);
+export default Orders;

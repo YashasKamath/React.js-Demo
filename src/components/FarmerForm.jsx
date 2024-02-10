@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { updateFarmers, updateUserEmail } from "../redux";
+import { updateUserEmail } from "../redux";
 import "../App.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { updateFarmersDataChanged } from "../redux";
 
 function FarmerForm(props) {
   const [farmer, setFarmer] = useState({
@@ -71,7 +70,6 @@ function FarmerForm(props) {
       return;
     } else setError("");
 
-    props.updateFarmers(farmer);
     fetch("http://localhost:3002/farmers", {
       method: "POST",
       headers: {
@@ -183,14 +181,12 @@ function FarmerForm(props) {
 
 const mapStateToProps = (state) => {
   return {
-    farmersDataChanged : state.farmers.dataChanged,
     email: state.user.email,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateFarmers: () => dispatch(updateFarmersDataChanged()),
     updateUserEmail: (email) => dispatch(updateUserEmail(email)),
   };
 };

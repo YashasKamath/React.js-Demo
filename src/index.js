@@ -6,10 +6,8 @@ import Register from './components/Register';
 import Login from './components/Login';
 import Protected from './components/Protected';
 import Home from './components/Home'
-// import '../styles'
-
-// import dotenv from 'dotenv';
-// dotenv.config();
+import Orders from './components/Orders';
+import Farmers from './components/Farmers';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -18,6 +16,8 @@ const router = createBrowserRouter(
             <Route path="login" element={<Login />} />
             <Route path='/' element={<Protected />}>
                 <Route path='/' index element={<Home />} />
+                <Route path='/orderTable' index element={<Orders />} />
+                <Route path='/farmerTable' index element={<Farmers />} />
             </Route>
         </Route>
     )
