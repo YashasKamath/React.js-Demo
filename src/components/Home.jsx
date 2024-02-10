@@ -1,25 +1,29 @@
-import React, { useState, useEffect } from "react";
-import Form from "./FarmerForm";
+import React, {useEffect} from "react";
+import FarmerForm from "./FarmerForm";
 import Farmers from "./Farmers";
-import ratingCalculator from "../Rating";
 import { connect } from "react-redux";
-import { Input, Ripple, initMDB } from "mdb-ui-kit";
-
-initMDB({ Input, Ripple });
+import OrderForm from "./OrderForm";
+import AdminOrders from "./adminOrders";
+import { updateUserEmail } from "../redux";
 
 function Home(props) {
-  const [avgRating, setAvgRating] = useState(0.0);
+
+  function isAdmin(){
+    return props.email === "admin@gmail.com"
+  }
 
   useEffect(() => {
-    setAvgRating(ratingCalculator(props.farmers));
-  }, [props.farmers]);
+    props.updateUserEmail(localStorage.getItem("email"))
+  }, [])
 
   return (
     <div>
-      <Form />
-      <h2>Avg rating is {avgRating}</h2>
+      {!isAdmin() && <FarmerForm />}
+      {isAdmin() && <OrderForm />}
       <br />
-      <Farmers />
+      {isAdmin() && <Farmers />}
+      <br />
+      {isAdmin() && <AdminOrders />}
     </div>
   );
 }
@@ -27,7 +31,14 @@ function Home(props) {
 const mapStateToProps = (state) => {
   return {
     farmers: state.farmers.farmers,
+    email : state.user.email
   };
 };
 
-export default connect(mapStateToProps)(Home);
+const mapDispatchToProps = dispatch => {
+  return {
+    updateUserEmail : email => dispatch(updateUserEmail(email))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

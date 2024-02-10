@@ -4,8 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { updateUserEmail } from "../redux";
+import { connect } from "react-redux";
 
-function Register() {
+function Register(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -35,7 +37,10 @@ function Register() {
       const user = userCredential.user;
       localStorage.setItem("token", user.accessToken);
       localStorage.setItem("user", JSON.stringify(user));
+      props.updateUserEmail(email)
+      localStorage.setItem("email", email)
       navigate("/login");
+
     } catch (error) {
       console.error(error);
     }
@@ -107,23 +112,6 @@ function Register() {
                 required
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Type of user</Form.Label>
-              {["admin", "customer", "farmer"].map((type) => (
-                <div key={`inline-radio`} className="mb-3">
-                  <Form.Check
-                    required
-                    inline
-                    label={type}
-                    name="type"
-                    type="radio"
-                    id={`inline-radio-${type}`}
-                    // onClick={handleRadio}
-                  />
-                </div>
-              ))}
-            </Form.Group>
-
             <div class="text-center">
               <Button as="input" type="submit" value="Sign Up" />
               <br />
@@ -139,4 +127,16 @@ function Register() {
   );
 }
 
-export default Register;
+const mapStateToProps = state => {
+  return {
+    email : state.user.email
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    updateUserEmail : email => dispatch(updateUserEmail(email))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

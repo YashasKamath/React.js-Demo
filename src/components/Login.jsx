@@ -4,8 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { connect } from "react-redux";
+import { updateUserEmail } from "../redux";
 
-function Login() {
+function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -23,6 +25,8 @@ function Login() {
       const user = userCredential.user;
       localStorage.setItem("token", user.accessToken);
       localStorage.setItem("user", JSON.stringify(user));
+      props.updateUserEmail(email)
+      localStorage.setItem("email", email)
       navigate("/");
       setError("");
     } catch (error) {
@@ -81,4 +85,17 @@ function Login() {
   );
 }
 
-export default Login;
+const mapStateToProps = state => {
+  return {
+    ...state,
+    email : state.user.email
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    updateUserEmail : email => dispatch(updateUserEmail(email))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps) (Login);

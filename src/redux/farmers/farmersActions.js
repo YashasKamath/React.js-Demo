@@ -1,8 +1,7 @@
-import { UPDATE_FARMERS } from "./farmersTypes";
+import { FARMERS_DATA_CHANGED } from "./farmersTypes";
 
-export const updateFarmers = farmer => {
+export const updateFarmersDataChanged = () => {
     return {
-        type : UPDATE_FARMERS,
-        payload : farmer
+        type : FARMERS_DATA_CHANGED
     }
 }
