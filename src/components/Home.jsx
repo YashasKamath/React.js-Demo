@@ -1,19 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import FarmerForm from "./FarmerForm";
-import { connect } from "react-redux";
 import OrderForm from "./OrderForm";
-import { updateUserEmail } from "../redux";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 
-function Home(props) {
-  function isAdmin() {
-    return props.email === "admin@gmail.com";
-  }
+function Home() {
+
+  const [email, setEmail] = useState('')
 
   useEffect(() => {
-    props.updateUserEmail(localStorage.getItem("email"));
-  }, []);
+    setEmail(localStorage.getItem('email'))
+  }, [])
+
+  function isAdmin() {
+    return email === "admin@gmail.com";
+  }
 
   const navigate = useNavigate();
 
@@ -51,16 +52,4 @@ function Home(props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    email: state.user.email,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    updateUserEmail: (email) => dispatch(updateUserEmail(email)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default Home;

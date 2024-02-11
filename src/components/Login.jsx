@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { updateEmail } from "../redux";
 import { connect } from "react-redux";
-import { updateUserEmail } from "../redux";
 
 function Login(props) {
   const [email, setEmail] = useState("");
@@ -25,8 +25,8 @@ function Login(props) {
       const user = userCredential.user;
       localStorage.setItem("token", user.accessToken);
       localStorage.setItem("user", JSON.stringify(user));
-      props.updateUserEmail(email)
       localStorage.setItem("email", email)
+      props.updateEmail(email)
       navigate("/");
       setError("");
     } catch (error) {
@@ -36,9 +36,9 @@ function Login(props) {
   };
 
   return (
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-md-6">
+    <div className="container">
+      <div className="row justify-content-center">
+        <div className="col-md-6">
           <Form onSubmit={handleSubmit}>
             <h2>Login</h2>
             {error && (
@@ -85,17 +85,10 @@ function Login(props) {
   );
 }
 
-const mapStateToProps = state => {
-  return {
-    ...state,
-    email : state.user.email
-  }
-}
-
 const mapDispatchToProps = dispatch => {
   return {
-    updateUserEmail : email => dispatch(updateUserEmail(email))
+    updateEmail : email => dispatch(updateEmail(email))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps) (Login);
+export default connect(null, mapDispatchToProps)(Login);

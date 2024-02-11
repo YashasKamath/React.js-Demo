@@ -28,9 +28,9 @@ export default class About extends Component {
 
   render() {
     return (
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-md-6">
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-md-6" style={{"textAlign" : "justify"}}>
             <h1 style={{ textAlign: "center" }}>{this.state.title}</h1>
             <p>{this.state.intro}</p>
             <p>{this.state.theme}</p>

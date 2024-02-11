@@ -41,16 +41,19 @@ function OrderForm(props) {
         return data;
       })
       .then((data) => {
-        console.log(data);
         fetch(`http://localhost:3002/farmers/${data[0]["id"]}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            orders: Number(data[0]["orders"]) + 1,
+            orders: data[0]["orders"] + 1,
             stockInKg:
               Number(data[0]["stockInKg"]) - Number(adminOrder.stockInKg),
+            amount:
+              data[0]["amount"] +
+              Number(adminOrder.stockInKg) * Number(data[0]["pricePerKg"]),
+            stocksSold : data[0]["stocksSold"] + Number(adminOrder.stockInKg)
           }),
         });
         fetch("http://localhost:3002/adminOrders", {
@@ -65,7 +68,7 @@ function OrderForm(props) {
           stockInKg: "",
         });
         setError("");
-        setSuccess('Order placed successfully!')
+        setSuccess("Order placed successfully!");
       })
       .catch((error) => {
         setError(error.message);

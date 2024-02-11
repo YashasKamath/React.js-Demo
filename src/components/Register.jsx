@@ -4,8 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { updateUserEmail } from "../redux";
-import { connect } from "react-redux";
 
 function Register(props) {
   const [email, setEmail] = useState("");
@@ -37,19 +35,19 @@ function Register(props) {
       const user = userCredential.user;
       localStorage.setItem("token", user.accessToken);
       localStorage.setItem("user", JSON.stringify(user));
-      props.updateUserEmail(email)
-      localStorage.setItem("email", email)
+      setError('')
       navigate("/login");
-
+      
     } catch (error) {
-      console.error(error);
+      console.error(error.message);
+      setError('Email already in use')
     }
   };
 
   return (
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-md-6">
+    <div className="container">
+      <div className="row justify-content-center">
+        <div className="col-md-6">
           <Form onSubmit={handleSubmit}>
             <h2>Register</h2>
             {error && (
@@ -127,16 +125,4 @@ function Register(props) {
   );
 }
 
-const mapStateToProps = state => {
-  return {
-    email : state.user.email
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    updateUserEmail : email => dispatch(updateUserEmail(email))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Register);
+export default Register;

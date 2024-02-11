@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import { updateUserEmail } from "../redux";
 import "../App.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import ListGroup from "react-bootstrap/ListGroup";
+import Table from "react-bootstrap/Table";
 
 function FarmerForm(props) {
   const [farmer, setFarmer] = useState({
@@ -13,44 +14,30 @@ function FarmerForm(props) {
     stockInKg: "",
   });
 
+  const [farmerData, setFarmerData] = useState({});
+
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
-  const [orders, setOrders] = useState("0");
-  const [amount, setAmount] = useState("0");
 
   useEffect(() => {
-    props.updateUserEmail(localStorage.getItem("email"));
+    const email = localStorage.getItem("email")
     fetch("http://localhost:3002/farmers")
       .then((res) => res.json())
       .then((data) =>
-        data.filter((farmer) => {
-          return farmer["email"] === props.email;
+        data.filter((eachFarmer) => {
+          return eachFarmer["email"] === email;
         })
       )
       .then((data) => {
+        console.log(data, 'lll')
         if (data.length) {
           setIsFormSubmitted(true);
-          setOrders(data[0]["orders"]);
-          fetch("http://localhost:3002/adminOrders")
-            .then((res) => res.json())
-            .then((data) =>
-              data.filter((adminOrder) => {
-                return adminOrder["farmerEmail"] === props.email;
-              })
-            )
-            .then((data) => {
-              let totalStocksBought = 0;
-              data.map(
-                (order) => (totalStocksBought += Number(order["stockInKg"]))
-              );
-              return totalStocksBought;
-            })
-            .then((totalStocksBought) => {
-              setAmount(totalStocksBought * Number(data[0]["pricePerKg"]));
-            });
-        } else setIsFormSubmitted(false);
+          setFarmerData(data[0]);
+        } else {
+          setIsFormSubmitted(false);
+        }
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [isFormSubmitted]);
 
   const [error, setError] = useState("");
 
@@ -81,21 +68,25 @@ function FarmerForm(props) {
         ...farmer,
         email: props.email,
         orders: 0,
+        amount: 0,
+        stocksSold: 0,
       }),
     });
+
     setFarmer({
       pricePerKg: "",
       address: "",
       rating: "",
       stockInKg: "",
     });
+
     setIsFormSubmitted(true);
   }
 
   return (
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-md-6">
+    <div className="container">
+      <div className="row justify-content-center">
+        <div className="col-md-6">
           {!isFormSubmitted && (
             <Form onSubmit={handleSubmit}>
               <h2>Intro Form</h2>
@@ -173,14 +164,54 @@ function FarmerForm(props) {
               </div>
             </Form>
           )}
-          {isFormSubmitted && <h2>Number of orders placed : {orders}</h2>}
-          {isFormSubmitted && <h2>Amount earned: {amount}</h2>}
           {isFormSubmitted && (
-            <div>
-              <br />
-              <br />
-              <br />
-            </div>
+            <Card>
+              <Card.Body>
+                <Card.Title>Farmer details</Card.Title>
+                <Card.Text>
+                  Please find below your details, and orders that you have
+                  received from admin
+                </Card.Text>
+              </Card.Body>
+              <ListGroup className="list-group-flush">
+                <Table striped bordered hover variant="dark">
+                  <thead>
+                    <tr>
+                      <td>Email</td>
+                      <td>{farmerData["email"]}</td>
+                    </tr>
+                    <tr>
+                      <td>Address</td>
+                      <td>{farmerData["address"]}</td>
+                    </tr>
+                    <tr>
+                      <td>Rating</td>
+                      <td>{farmerData["rating"]}</td>
+                    </tr>
+                    <tr>
+                      <td>Price per kg</td>
+                      <td>{farmerData["pricePerKg"]}</td>
+                    </tr>
+                    <tr>
+                      <td>Stock In kg</td>
+                      <td>{farmerData["stockInKg"]}</td>
+                    </tr>
+                    <tr>
+                      <td>Orders</td>
+                      <td>{farmerData["orders"]}</td>
+                    </tr>
+                    <tr>
+                      <td>Stock sold in kg</td>
+                      <td>{farmerData["stocksSold"]}</td>
+                    </tr>
+                    <tr>
+                      <td>Amount earned</td>
+                      <td>{farmerData["amount"]}</td>
+                    </tr>
+                  </thead>
+                </Table>
+              </ListGroup>
+            </Card>
           )}
         </div>
       </div>
@@ -188,16 +219,4 @@ function FarmerForm(props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    email: state.user.email,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    updateUserEmail: (email) => dispatch(updateUserEmail(email)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(FarmerForm);
+export default FarmerForm;

@@ -38,13 +38,16 @@ function Farmers() {
   }
 
   function sortByPrice() {
-    console.log('sorting')
-    setFarmers(prevFarmers => {
-      let copyFarmers = [...prevFarmers]
+    console.log("sorting");
+    setFarmers((prevFarmers) => {
+      let copyFarmers = [...prevFarmers];
       return copyFarmers.sort((firstFarmer, secondFarmer) => {
-        return Number(firstFarmer["pricePerKg"]) <= Number(secondFarmer["pricePerKg"]) ? -1 : 1
-      })
-    })
+        return Number(firstFarmer["pricePerKg"]) <=
+          Number(secondFarmer["pricePerKg"])
+          ? -1
+          : 1;
+      });
+    });
   }
 
   const goBack = () => {
@@ -53,9 +56,9 @@ function Farmers() {
 
   return (
     <div>
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-md-6">
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-md-6">
             <h3 style={{ textAlign: "center" }}>Farmers</h3>
             <Form inline onSubmit={filter}>
               <Row>
@@ -81,38 +84,36 @@ function Farmers() {
       </div>
       <br />
       {farmers.length ? (
-        <div>
-          <Table striped bordered hover variant="dark">
-            <thead>
-              <tr>
-                <th>Email</th>
-                <th>Address</th>
-                <th>Price Per Kg</th>
-                <th>Rating</th>
-                <th>Stock In Kg</th>
-              </tr>
-            </thead>
-            <tbody>
-              {farmers.map((farmer) => {
-                return (
-                  <tr>
-                    <td>{farmer.email}</td>
-                    <td>{farmer.address}</td>
-                    <td>{farmer.pricePerKg}</td>
-                    <td>{farmer.rating}</td>
-                    <td>{farmer.stockInKg}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </Table>
-          <div class="text-center">
-            <Button as="input" type="submit" value="Go Back" onClick={goBack} />
-          </div>
-        </div>
+        <Table striped bordered hover variant="dark">
+          <thead>
+            <tr>
+              <th>Email</th>
+              <th>Address</th>
+              <th>Price Per Kg</th>
+              <th>Rating</th>
+              <th>Stock In Kg</th>
+            </tr>
+          </thead>
+          <tbody>
+            {farmers.map((farmer) => {
+              return (
+                <tr>
+                  <td>{farmer.email}</td>
+                  <td>{farmer.address}</td>
+                  <td>{farmer.pricePerKg}</td>
+                  <td>{farmer.rating}</td>
+                  <td>{farmer.stockInKg}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </Table>
       ) : (
-        <Table></Table>
+        <h4>No records to show here...</h4>
       )}
+      <div class="text-center">
+        <Button as="input" type="submit" value="Go Back" onClick={goBack} />
+      </div>
     </div>
   );
 }

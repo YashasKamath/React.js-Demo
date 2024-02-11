@@ -1,1 +1,1 @@
-export {updateUserEmail} from './user/userActions'
+export * from './user/userActions'

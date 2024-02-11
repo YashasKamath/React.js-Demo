@@ -1,4 +1,4 @@
-import { UPDATE_EMAIL } from "./userTypes"
+import { UPDATE_EMAIL } from "./userTypes";
 
 const initialState = {
     email : ''
@@ -10,7 +10,7 @@ const userReducer = (state = initialState, action) => {
             ...state,
             email : action.payload
         }
-        default : return state
+        default: return state
     }
 }
 

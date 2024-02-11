@@ -1,83 +1,65 @@
 {
   "farmers": [
     {
-      "id": "ade6",
-      "address": "ya",
+      "id": "ba82",
+      "address": "def",
+      "rating": "2",
+      "pricePerKg": "50",
+      "stockInKg": "35",
+      "email": "def@gmail.com",
+      "orders": 0,
+      "amount": 0,
+      "stocksSold": 0
+    },
+    {
+      "id": "8652",
+      "address": "abc",
+      "rating": "3",
+      "pricePerKg": "25",
+      "stockInKg": 23,
+      "email": "abc@gmail.com",
+      "orders": 1,
+      "amount": 1675,
+      "stocksSold": 67
+    },
+    {
+      "id": "cde4",
+      "address": "jkl",
+      "rating": "2",
+      "pricePerKg": "60",
+      "stockInKg": "50",
+      "email": "jkl@gmail.com",
+      "orders": 0,
+      "amount": 0,
+      "stocksSold": 0
+    },
+    {
+      "id": "88af",
+      "address": "xyz",
       "rating": "5",
-      "pricePerKg": "56",
-      "stockInKg": 0,
-      "email": "ya@gmail.com",
-      "orders": 8
-    },
-    {
-      "id": "5258",
-      "address": "kk",
-      "rating": "3",
-      "pricePerKg": "59",
-      "stockInKg": 0,
-      "email": "kk@gmail.com",
-      "orders": 1
-    },
-    {
-      "id": "bbb9",
-      "address": "pqr",
-      "rating": "3",
-      "pricePerKg": "23",
-      "stockInKg": "89",
-      "email": "pqr@gmail.com",
-      "orders": 0
+      "pricePerKg": "100",
+      "stockInKg": 20,
+      "email": "xyz@gmail.com",
+      "orders": 1,
+      "amount": 2000,
+      "stocksSold": 20
     }
   ],
   "adminOrders": [
     {
-      "id": "e882",
-      "farmerEmail": "ya@gmail.com",
-      "stockInKg": "34"
+      "id": "b59c",
+      "farmerEmail": "abc@gmail.com",
+      "stockInKg": "67"
     },
     {
-      "id": "ac99",
-      "farmerEmail": "kk@gmail.com",
-      "stockInKg": "22"
-    },
-    {
-      "id": "9203",
-      "farmerEmail": "ya@gmail.com",
-      "stockInKg": "11"
-    },
-    {
-      "id": "54a8",
-      "farmerEmail": "ya@gmail.com",
-      "stockInKg": "24"
-    },
-    {
-      "id": "68df",
-      "farmerEmail": "ya@gmail.com",
-      "stockInKg": "4"
-    },
-    {
-      "id": "ab0b",
-      "farmerEmail": "ya@gmail.com",
-      "stockInKg": "2"
-    },
-    {
-      "id": "a9ab",
-      "farmerEmail": "ya@gmail.com",
-      "stockInKg": "1"
-    },
-    {
-      "id": "af50",
-      "farmerEmail": "ya@gmail.com",
-      "stockInKg": "1"
-    },
-    {
-      "id": "021d",
-      "farmerEmail": "ya@gmail.com",
-      "stockInKg": "1"
+      "id": "61e5",
+      "farmerEmail": "xyz@gmail.com",
+      "stockInKg": "20"
     }
   ],
-  "about" : {
-    "title" : "About",
-    "intro" : "Biogas technology may have the potential to short-circuit the “energy transition” from biogas to “modern” fuels. Biogas technology is a particularly useful system in the worldwide rural economy and can fulfill several end-uses. The gas is useful as a fuel substitute for firewood, dung, agricultural residues, petrol, diesel, and electricity, depending on the nature of the task, and local supply conditions and constraints, thus supplying energy for cooking and lighting. Biogas systems also provide a residue organic waste after anaerobic digestion that has superior nutrient qualities over the usual organic fertilizer, cattle dung, as it is in the form of ammonia. Anaerobic digesters also function as a waste disposal system, particularly for human waste, and can, therefore, prevent potential sources of environmental contamination and the spread of pathogens. Small-scale industries are also made possible, from the sale of surplus gas to the provision of power of a rural-based industry; therefore biogas may also provide the user with income generating opportunities. The gas can also be used to power engines, in a dual fuel mix with petrol and diesel, and can aid in pumped irrigation systems.",
-    "theme" : "This website is all about accommodating farmers on this website, collecting their details and then allowing the admin to make transactions, which are basically placing orders with the farmers for the organic waste stock that they have and helping farmers keep track of the amount that they have earned."
+  "about": {
+    "title": "About",
+    "intro": "Biogas technology may have the potential to short-circuit the “energy transition” from biogas to “modern” fuels. Biogas technology is a particularly useful system in the worldwide rural economy and can fulfill several end-uses. The gas is useful as a fuel substitute for firewood, dung, agricultural residues, petrol, diesel, and electricity, depending on the nature of the task, and local supply conditions and constraints, thus supplying energy for cooking and lighting. Biogas systems also provide a residue organic waste after anaerobic digestion that has superior nutrient qualities over the usual organic fertilizer, cattle dung, as it is in the form of ammonia. Anaerobic digesters also function as a waste disposal system, particularly for human waste, and can, therefore, prevent potential sources of environmental contamination and the spread of pathogens. Small-scale industries are also made possible, from the sale of surplus gas to the provision of power of a rural-based industry; therefore biogas may also provide the user with income generating opportunities. The gas can also be used to power engines, in a dual fuel mix with petrol and diesel, and can aid in pumped irrigation systems.",
+    "theme": "This website is all about accommodating farmers on this website, collecting their details and then allowing the admin to make transactions, which are basically placing orders with the farmers for the organic waste stock that they have and helping farmers keep track of the amount that they have earned."
   }
 }

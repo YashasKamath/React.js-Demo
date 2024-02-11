@@ -1,6 +1,6 @@
 import { UPDATE_EMAIL } from "./userTypes";
 
-export const updateUserEmail = email => {
+export const updateEmail = email => {
     return {
         type : UPDATE_EMAIL,
         payload : email
